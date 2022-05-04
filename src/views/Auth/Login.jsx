@@ -16,8 +16,18 @@ export default function Login() {
   const { from } = location.state || { from: { pathname: '/' } };
 
   const handleLogin = (event) => {
-    event.preventDefault();
-    const loginWasSuccessful = auth.login(formState.email, formState.password);
+    try {
+      event.preventDefault();
+      const loginWasSuccessful = auth.login(
+        formState.email,
+        formState.password
+      );
+      if (loginWasSuccessful) {
+        history.replace('/');
+      }
+    } catch (error) {
+      setError('Are you sure that is is your email and password?');
+    }
 
     // TODO: If login was unsuccessful, set an error with a message
     // to display to the user that their login failed.
@@ -37,12 +47,14 @@ export default function Login() {
           id="email"
           name="email"
           type="email"
+          onChange={(event) => handleFormChange(event)}
         />{' '}
         <label>Password</label>
         <input
           id="password"
           name="password"
           type="password"
+          onChange={(event) => handleFormChange(event)}
         />
         <button type="submit" aria-label="Sign In">
           Sign in
