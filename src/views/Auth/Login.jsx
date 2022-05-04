@@ -23,10 +23,10 @@ export default function Login() {
         formState.password
       );
       if (loginWasSuccessful) {
-        history.replace('/');
+        history.replace(from);
       }
     } catch (error) {
-      setError('Are you sure that is is your email and password?');
+      setError(error.message);
     }
 
     // TODO: If login was unsuccessful, set an error with a message

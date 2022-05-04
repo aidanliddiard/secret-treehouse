@@ -10,6 +10,7 @@ export function ProvideAuth({ children }) {
       email === process.env.AUTH_EMAIL &&
       password === process.env.AUTH_PASSWORD;
     if (loginSuccessful) setUser({ email });
+    else throw new Error('Are you sure that is is your email and password?');
     return loginSuccessful;
   };
 
